@@ -3,6 +3,10 @@ function Assignment1(numOfParticles)
 %   Models the behaviour of interacting electrons using Monte-Carlo
 %   methods.
 
+%Add the code directory to the matlab path to get access for the rest of
+%the script
+addpath(strcat(fileparts(mfilename('fullpath')), '\code'));
+
 %Universal constants
 c.eRestMass = 9.109E-31; %kg
 c.boltzmann = 1.381E-23; %J/K
@@ -20,18 +24,17 @@ electron.y = zeros(1,numOfParticles);
 electron.vx = zeros(1, numOfParticles);
 electron.vy = zeros(1, numOfParticles);
 
-system.thermalV = sqrt(c.boltzmann.*system.Temp./(electron.effM));
 
+%Calculation for thermal velocity and mean free path
+system.thermalV = sqrt(2.*c.boltzmann.*system.Temp./(electron.effM));
 system.meanFreePath = system.thermalV.*system.Tau;
 
+[electron.x, electron.y] = assignPosition(system.x, system.y, electron.num);
+[electron.vx electron.vy] = assignVelocity(system.thermalV,  electron.num, 2);
 
-
-electron.x = rand(1, numOfParticles).*system.x;
-electron.y = rand(1, numOfParticles).*system.y;
-
-
-
-
+%Generate the time step as time it takes to travel 150th
+%of the minimum dimension at speed of thermal velocity
+timeStep = min([system.x system.y])./(150.*system.thermalV);
 
 end
 
