@@ -5,12 +5,12 @@ function [xVect, yVect] = assignPosition(xBound, yBound, numE)
 %       xBound - Maximum x value allowed by the system
 %       yBound - Maximum y value allowed by the system
 %       numE   - Number of electrons being simulated
-%   Outpus:
+%   Outputs:
 %       xVect  - Vector of x values of length numE
 %       yVect  - Vector of y values of length numE
 
-xVect = rand(numE, 1)*xBound;
-yVect = rand(numE, 1)*yBound;
+xVect = rand(1,numE)*xBound;
+yVect = rand(1,numE)*yBound;
 
 end
 

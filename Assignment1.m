@@ -1,4 +1,4 @@
-function Assignment1(numOfParticles)
+function Assignment1(numOfParticles, numLoops)
 %Assignment1 Submission for Assignment1 of ELEC 4700
 %   Models the behaviour of interacting electrons using Monte-Carlo
 %   methods.
@@ -30,11 +30,18 @@ system.thermalV = sqrt(2.*c.boltzmann.*system.Temp./(electron.effM));
 system.meanFreePath = system.thermalV.*system.Tau;
 
 [electron.x, electron.y] = assignPosition(system.x, system.y, electron.num);
-[electron.vx electron.vy] = assignVelocity(system.thermalV,  electron.num, 2);
+[electron.vx, electron.vy] = assignVelocity(system.thermalV,  electron.num, 2);
 
 %Generate the time step as time it takes to travel 150th
 %of the minimum dimension at speed of thermal velocity
-timeStep = min([system.x system.y])./(150.*system.thermalV);
+timeStep = min([system.x system.y])./(100.*system.thermalV);
+
+figure(1);
+xlim([0 system.x]);
+ylim([0 system.y]);
+
+hold on
+
+noCollision(system, electron, numLoops, timeStep);
 
 end
-
