@@ -30,7 +30,6 @@ system.thermalV = sqrt(2.*c.boltzmann.*system.Temp./(electron.effM));
 system.meanFreePath = system.thermalV.*system.Tau;
 
 [electron.x, electron.y] = assignPosition(system.x, system.y, electron.num);
-[electron.vx, electron.vy] = assignVelocity(system.thermalV,  electron.num, 2);
 
 %Generate the time step as time it takes to travel 150th
 %of the minimum dimension at speed of thermal velocity
@@ -42,6 +41,9 @@ ylim([0 system.y]);
 
 hold on
 
-noCollision(system, electron, numLoops, timeStep);
+
+%Uncomment to run different parts of assignment
+%noCollision(system, electron, numLoops, timeStep);
+meanFreePath(system,electron, numLoops, timeStep);
 
 end

@@ -13,6 +13,8 @@ function noCollision(system, electron, numLoops, timeStep)
 c.boltzmann = 1.381E-23; %J/K
 t = [0];
 
+[electron.vx, electron.vy] = assignVelocity(system.thermalV,system.Temp, electron.num, 2, 'uniform');
+
 colourScheme = [0, 0.4470, 0.7410;0.8500, 0.3250, 0.0980;0.9290, 0.6940, 0.1250;
     0.4940, 0.1840, 0.5560; 0.4660, 0.6740, 0.1880; 0.3010, 0.7450, 0.9330; 0.6350, 0.0780, 0.1840];
 
@@ -52,22 +54,22 @@ for i = 1:numLoops
     
     %Plot all of the electrons if there are fewer than 10
     %Uncomment to plot during loop 
-%     for j = 1:min([electron.num 7])
-%         noLine = find(jumped(:,j),50);
-%         if isempty(noLine)
-%             %No skips, plot normally
-%             plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
-%         else
-%             plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
-%             for k = 1:length(noLine)         
-%                 if k == length(noLine)
-%                     plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
-%                 else
-%                     plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
-%                 end
-%             end
-%         end
-%     end
+    for j = 1:min([electron.num 7])
+        noLine = find(jumped(:,j),50);
+        if isempty(noLine)
+            %No skips, plot normally
+            plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
+        else
+            plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
+            for k = 1:length(noLine)         
+                if k == length(noLine)
+                    plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
+                else
+                    plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
+                end
+            end
+        end
+    end
 
     %Uncomment for temperature calculatation
 %     avgSpeed = mean(mean(sqrt(electron.vx.^2 + electron.vy.^2)));
@@ -83,26 +85,23 @@ end
 
 
 %Plotting after loop, faster
-% for j = 1:electron.num
+
+% for j = 1:min([electron.num 7])
 %     noLine = find(jumped(:,j),50);
 %     if isempty(noLine)
 %         %No skips, plot normally
-%         plot(electron.x(:,j),electron.y(:,j));
+%         plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
 %     else
-%         plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j));
+%         plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
 %         for k = 1:length(noLine)         
 %             if k == length(noLine)
-%                 plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j));
+%                 plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
 %             else
-%                 plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j));
+%                 plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
 %             end
 %         end
 %     end
 % end
-
-
-
-
 
 
 
