@@ -13,7 +13,7 @@ function noCollision(system, electron, numLoops, timeStep)
 c.boltzmann = 1.381E-23; %J/K
 t = [0];
 
-[electron.vx, electron.vy] = assignVelocity(system.thermalV,system.Temp, electron.num, 2, 'uniform');
+[electron.vx, electron.vy] = assignVelocity(system, electron, 2, 'uniform');
 
 colourScheme = [0, 0.4470, 0.7410;0.8500, 0.3250, 0.0980;0.9290, 0.6940, 0.1250;
     0.4940, 0.1840, 0.5560; 0.4660, 0.6740, 0.1880; 0.3010, 0.7450, 0.9330; 0.6350, 0.0780, 0.1840];
@@ -52,7 +52,7 @@ for i = 1:numLoops
     [electron.y, electron.vy] = propagate(electron.y, electron.vy, timeStep);
     
     
-    %Plot all of the electrons if there are fewer than 10
+    %Plot all of the electrons if there are fewer than 7
     %Uncomment to plot during loop 
     for j = 1:min([electron.num 7])
         noLine = find(jumped(:,j),50);
