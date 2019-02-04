@@ -91,22 +91,22 @@ for i = 1:numLoops
     
     %Plot all of the electrons if there are fewer than 7
     %Uncomment to plot during loop 
-%     for j = 1:min([electron.num 7])
-%         noLine = find(jumped(:,j),50);
-%         if isempty(noLine)
-%             %No skips, plot normally
-%             plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
-%         else
-%             plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
-%             for k = 1:length(noLine)         
-%                 if k == length(noLine)
-%                     plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
-%                 else
-%                     plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
-%                 end
-%             end
-%         end
-%     end
+    for j = 1:min([electron.num 7])
+        noLine = find(jumped(:,j),50);
+        if isempty(noLine)
+            %No skips, plot normally
+            plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
+        else
+            plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
+            for k = 1:length(noLine)         
+                if k == length(noLine)
+                    plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
+                else
+                    plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
+                end
+            end
+        end
+    end
 
     %Uncomment for temperature calculatation
     avgSpeed = mean(mean(sqrt(electron.vx.^2 + electron.vy.^2)));
@@ -123,23 +123,23 @@ end
 
 
 %Plotting after loop, faster
-figure(1)
-for j = 1:min([electron.num 7])
-    noLine = find(jumped(:,j),50);
-    if isempty(noLine)
-        %No skips, plot normally
-        plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
-    else
-        plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
-        for k = 1:length(noLine)         
-            if k == length(noLine)
-                plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
-            else
-                plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
-            end
-        end
-    end
-end
+% figure(1)
+% for j = 1:min([electron.num 7])
+%     noLine = find(jumped(:,j),50);
+%     if isempty(noLine)
+%         %No skips, plot normally
+%         plot(electron.x(:,j),electron.y(:,j), 'Color', colourScheme(j,:));
+%     else
+%         plot(electron.x((1:noLine(1)-1),j),electron.y((1:noLine(1)-1),j), 'Color', colourScheme(j,:));
+%         for k = 1:length(noLine)         
+%             if k == length(noLine)
+%                 plot(electron.x((noLine(k):end),j),electron.y((noLine(k):end),j), 'Color', colourScheme(j,:));
+%             else
+%                 plot(electron.x((noLine(k):noLine(k+1)-1),j),electron.y((noLine(k):noLine(k+1)-1),j), 'Color', colourScheme(j,:));
+%             end
+%         end
+%     end
+% end
 
 fprintf("Mean Free Path: %e \n", mean(distanceBetweenScatters));
 fprintf("Mean Time Between Scatters: %e \n", mean(timeBetweenScatters));

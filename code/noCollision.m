@@ -84,7 +84,7 @@ end
 
 
 
-%Plotting after loop, faster
+%Plotting after loop
 
 % for j = 1:min([electron.num 7])
 %     noLine = find(jumped(:,j),50);

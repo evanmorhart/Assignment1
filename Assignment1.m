@@ -43,8 +43,8 @@ hold on
 
 
 %Uncomment to run different parts of assignment
-%noCollision(system, electron, numLoops, timeStep);
+noCollision(system, electron, numLoops, timeStep);
 %meanFreePath(system,electron, numLoops, timeStep);
-bottleNeck(system, electron, numLoops, timeStep);
+%bottleNeck(system, electron, numLoops, timeStep, 'specular');
 
 end
